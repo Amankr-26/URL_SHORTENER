@@ -1,12 +1,17 @@
 import { useState } from "react";
+import "./App.css";
 
 function App() {
   const [url, setUrl] = useState("");
   const [shortUrl, setShortUrl] = useState("");
+  const [error, setError] = useState("");
 
   async function shortenUrl() {
+    setError("");
+    setShortUrl("");
+
     if (url === "") {
-      alert("Please enter a URL");
+      setError("Please enter a URL");
       return;
     }
 
@@ -24,7 +29,7 @@ function App() {
       const data = await response.json();
 
       if (!response.ok) {
-        alert(data.message);
+        setError(data.message);
         return;
       }
 
@@ -33,33 +38,52 @@ function App() {
       );
     } catch (error) {
       console.error(error);
-      alert("Unable to connect to server");
+      setError("Unable to connect to server");
     }
   }
 
   return (
-    <div>
-      <h1>URL Shortener</h1>
+    <div className="app">
+      <div className="container">
+        <h1>URL Shortener</h1>
 
-      <input
-        type="text"
-        placeholder="Enter your long URL"
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-      />
-
-      <button onClick={shortenUrl}>
-        Shorten URL
-      </button>
-
-      {shortUrl && (
-        <p>
-          Short URL:{" "}
-          <a href={shortUrl} target="_blank">
-            {shortUrl}
-          </a>
+        <p className="subtitle">
+          Shorten your long URLs quickly and easily.
         </p>
-      )}
+
+        <div className="form">
+          <input
+            type="text"
+            placeholder="Enter your long URL"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+          />
+
+          <button onClick={shortenUrl}>
+            Shorten URL
+          </button>
+        </div>
+
+        {error && (
+          <p className="error">
+            {error}
+          </p>
+        )}
+
+        {shortUrl && (
+          <div className="result">
+            <p>Your shortened URL:</p>
+
+            <a
+              href={shortUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {shortUrl}
+            </a>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
