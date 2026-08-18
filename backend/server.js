@@ -125,6 +125,6 @@ app.get("/:shortCode", async (req, res) => {
 });
 
 // Start server
-app.listen(PORT, "localhost", () => {
+app.listen(PORT, "localhost",() => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
