@@ -1,51 +1,28 @@
-.app {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.dashboard {
+  margin-top: 50px;
 }
 
-.container {
-  width: 90%;
-  max-width: 700px;
-  text-align: center;
+.dashboard h2 {
+  margin-bottom: 20px;
 }
 
-h1 {
-  font-size: 48px;
-  margin-bottom: 10px;
-}
-
-.subtitle {
-  font-size: 18px;
-  margin-bottom: 30px;
-}
-
-.form {
-  display: flex;
-  gap: 10px;
-}
-
-.form input {
-  flex: 1;
-  padding: 14px;
-  font-size: 16px;
-}
-
-.form button {
-  padding: 14px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.error {
+table {
+  width: 100%;
+  border-collapse: collapse;
   margin-top: 20px;
 }
 
-.result {
-  margin-top: 30px;
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
 }
 
-.result a {
-  font-size: 18px;
+th {
+  font-weight: bold;
+}
+
+td {
+  word-break: break-word;
 }
