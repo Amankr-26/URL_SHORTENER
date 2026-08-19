@@ -11,7 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5001;
 const JWT_SECRET = process.env.JWT_SECRET;
 function generateShortCode() {
   return Math.random().toString(36).substring(2, 8);
@@ -293,6 +293,6 @@ app.get("/:shortCode", async (req, res) => {
 });
 
 // Start server
-app.listen(PORT, "localhost",() => {
+app.listen(PORT, "0.0.0.0",() => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
