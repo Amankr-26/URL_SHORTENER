@@ -26,3 +26,31 @@ th {
 td {
   word-break: break-word;
 }
+/* Login page layout */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Make login form bigger */
+.login-form {
+  width: 500px;
+}
+
+/* Make inputs bigger */
+.login-form input {
+  width: 100%;
+  height: 55px;
+  box-sizing: border-box;
+  font-size: 20px;
+  padding: 0 15px;
+}
+
+/* Make login button bigger */
+.login-form button {
+  min-width: 120px;
+  height: 50px;
+  font-size: 18px;
+}

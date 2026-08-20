@@ -79,14 +79,14 @@ function Login({ onLogin, onSignup }) {
   }
 
   return (
-    <div>
+    <div className="login-container">
       <h2>Login</h2>
 
       {/* --------------------------------
           LOGIN FORM
           -------------------------------- */}
 
-      <form onSubmit={loginUser}>
+      <form onSubmit={loginUser} className="login-form">
         <input
           type="email"
           placeholder="Email"
