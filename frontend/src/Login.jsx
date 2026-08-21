@@ -80,65 +80,69 @@ function Login({ onLogin, onSignup }) {
   }
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
+  <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
 
-      {/* --------------------------------
-          LOGIN FORM
-          -------------------------------- */}
+    <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
 
-      <form onSubmit={loginUser} className="login-form">
+      <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
+        Login
+      </h2>
+
+      <form onSubmit={loginUser} className="space-y-5">
+
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          className="w-full px-4 py-3 border border-gray-300 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
-
-        <br />
-        <br />
 
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          className="w-full px-4 py-3 border border-gray-300 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
 
-        <br />
-        <br />
-
-        <button type="submit">
+        <button
+          type="submit"
+          className="w-full py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition duration-200"
+        >
           Login
         </button>
+
       </form>
 
-      {/* Success message */}
       {message && (
-        <p>{message}</p>
+        <p className="mt-4 text-center text-green-600">
+          {message}
+        </p>
       )}
 
-      {/* Error message */}
       {error && (
-        <p>{error}</p>
+        <p className="mt-4 text-center text-red-600">
+          {error}
+        </p>
       )}
 
-      {/* --------------------------------
-          SIGN UP
-          -------------------------------- */}
-
-      <p>
+      <p className="mt-6 text-center text-gray-600">
         Don't have an account?{" "}
 
         <button
           type="button"
           onClick={onSignup}
+          className="text-blue-600 font-semibold hover:underline"
         >
           Sign Up
         </button>
       </p>
+
     </div>
-  );
+
+  </div>
+);
 }
 
 export default Login;
