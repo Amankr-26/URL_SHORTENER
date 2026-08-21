@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./App.css";
 
 // Backend URL comes from frontend/.env
 const API_URL = import.meta.env.VITE_API_URL;
@@ -18,12 +17,10 @@ function Login({ onLogin, onSignup }) {
   async function loginUser(e) {
     e.preventDefault();
 
-    // Clear previous messages
     setMessage("");
     setError("");
 
     try {
-      // Send login request to backend
       const response = await fetch(
         `${API_URL}/api/auth/login`,
         {
@@ -42,107 +39,146 @@ function Login({ onLogin, onSignup }) {
 
       const data = await response.json();
 
-      // Handle login errors from backend
       if (!response.ok) {
         setError(data.message);
         return;
       }
 
-      // Store JWT token in localStorage
+      // Store JWT token
       localStorage.setItem("token", data.token);
 
-      // Store logged-in user's information
+      // Store user information
       localStorage.setItem(
         "user",
         JSON.stringify(data.user)
       );
 
-      // Tell App.jsx that login was successful
+      // Tell App.jsx login was successful
       onLogin();
 
-      // Show success message
       setMessage("Login successful!");
 
-      // Clear input fields
       setEmail("");
       setPassword("");
 
-      // Useful for testing/debugging
       console.log("Logged in user:", data.user);
       console.log("JWT:", data.token);
 
     } catch (error) {
       console.error(error);
-
-      // This happens when frontend cannot reach backend
       setError("Unable to connect to server");
     }
   }
 
   return (
-  <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
 
-    <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
+      {/* Login Card */}
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
 
-      <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
-        Login
-      </h2>
+        {/* Heading */}
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-gray-900">
+            Welcome Back
+          </h2>
 
-      <form onSubmit={loginUser} className="space-y-5">
+          <p className="mt-2 text-gray-500">
+            Login to your URL Shortener account
+          </p>
+        </div>
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full px-4 py-3 border border-gray-300 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-        />
-
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full px-4 py-3 border border-gray-300 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-        />
-
-        <button
-          type="submit"
-          className="w-full py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition duration-200"
+        {/* Login Form */}
+        <form
+          onSubmit={loginUser}
+          className="space-y-5"
         >
-          Login
-        </button>
 
-      </form>
+          {/* Email */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Email
+            </label>
 
-      {message && (
-        <p className="mt-4 text-center text-green-600">
-          {message}
-        </p>
-      )}
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl
+              outline-none transition
+              focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+            />
+          </div>
 
-      {error && (
-        <p className="mt-4 text-center text-red-600">
-          {error}
-        </p>
-      )}
+          {/* Password */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Password
+            </label>
 
-      <p className="mt-6 text-center text-gray-600">
-        Don't have an account?{" "}
+            <input
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl
+              outline-none transition
+              focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+            />
+          </div>
 
-        <button
-          type="button"
-          onClick={onSignup}
-          className="text-blue-600 font-semibold hover:underline"
-        >
-          Sign Up
-        </button>
-      </p>
+          {/* Login Button */}
+          <button
+            type="submit"
+            className="w-full py-3 bg-blue-600 text-white
+            font-semibold rounded-xl
+            hover:bg-blue-700
+            active:scale-[0.98]
+            transition duration-200
+            shadow-md"
+          >
+            Login
+          </button>
+
+        </form>
+
+        {/* Success Message */}
+        {message && (
+          <p className="mt-5 text-center text-sm font-medium text-green-600">
+            {message}
+          </p>
+        )}
+
+        {/* Error Message */}
+        {error && (
+          <p className="mt-5 text-center text-sm font-medium text-red-600">
+            {error}
+          </p>
+        )}
+
+        {/* Signup */}
+        <div className="mt-7 pt-6 border-t border-gray-200 text-center">
+
+          <p className="text-gray-600 text-sm">
+            Don't have an account?
+          </p>
+
+          <button
+            type="button"
+            onClick={onSignup}
+            className="mt-2 text-blue-600 font-semibold
+            hover:text-blue-700 hover:underline
+            transition"
+          >
+            Create an account
+          </button>
+
+        </div>
+
+      </div>
 
     </div>
-
-  </div>
-);
+  );
 }
 
 export default Login;
