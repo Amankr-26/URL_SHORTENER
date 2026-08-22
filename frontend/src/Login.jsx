@@ -116,6 +116,14 @@ function Login({ onLogin, onSignup }) {
                   {showPassword ? "🙈" : "👁️"}
                 </button>
               </div>
+              <p className="mt-2 text-right">
+  <button
+    type="button"
+    className="text-sm text-blue-600 hover:underline"
+  >
+    Forgot password?
+  </button>
+</p>
 
             <button
               type="submit"
